@@ -1,0 +1,16 @@
+// don't forget to install the ImportJson script first !!
+
+function WeeklyFB() {
+  var sheetname = 'Add your sheet name here'
+  var entity_id = 'Add your ad account name here'
+  var access_token = 'Add your access token here'
+  var url = 'https://graph.facebook.com/v10.0/'
+    + entity_id
+    + '/insights'
+    + '?date_preset=last_week_mon_sun'
+    + '&fields=reach,impressions,clicks,cpc,spend'
+    + '&access_token=' + access_token
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(this.sheetname);
+  sheet.getRange(sheet.getLastRow()+1, 1).setValue('=ImportJSON("'+ url + '";"/data";"noHeaders")');  
+};
